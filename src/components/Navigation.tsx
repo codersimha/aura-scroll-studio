@@ -1,18 +1,23 @@
 import { motion } from "framer-motion";
-import { Link, useLocation } from "react-router-dom";
 import { Home, User, Briefcase, Award, Mail, FolderOpen } from "lucide-react";
 
 const navItems = [
-  { name: "Home", path: "/", icon: Home },
-  { name: "About", path: "/about", icon: User },
-  { name: "Work", path: "/work", icon: Briefcase },
-  { name: "Projects", path: "/projects", icon: FolderOpen },
-  { name: "Certifications", path: "/certifications", icon: Award },
-  { name: "Contact", path: "/contact", icon: Mail },
+  { name: "Home", href: "#home", icon: Home },
+  { name: "About", href: "#about", icon: User },
+  { name: "Work", href: "#work", icon: Briefcase },
+  { name: "Projects", href: "#projects", icon: FolderOpen },
+  { name: "Certifications", href: "#certifications", icon: Award },
+  { name: "Contact", href: "#contact", icon: Mail },
 ];
 
 export const Navigation = () => {
-  const location = useLocation();
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <motion.nav
@@ -24,26 +29,19 @@ export const Navigation = () => {
       <ul className="flex gap-8 items-center">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = location.pathname === item.path;
           
           return (
-            <li key={item.path}>
-              <Link
-                to={item.path}
+            <li key={item.href}>
+              <a
+                href={item.href}
+                onClick={(e) => handleClick(e, item.href)}
                 className="group relative flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors duration-300"
               >
-                <Icon size={18} className={isActive ? "text-primary" : ""} />
-                <span className={`text-sm font-medium ${isActive ? "text-primary" : ""}`}>
+                <Icon size={18} />
+                <span className="text-sm font-medium hidden md:inline">
                   {item.name}
                 </span>
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute -bottom-2 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
+              </a>
             </li>
           );
         })}
