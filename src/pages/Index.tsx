@@ -1,10 +1,12 @@
 import { CustomCursor } from "@/components/CustomCursor";
 import { Portfolio3D } from "@/components/Portfolio3D";
+import { Navigation } from "@/components/Navigation";
 
 const Index = () => {
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
       <CustomCursor />
+      <Navigation />
       
       {/* Background gradients */}
       <div className="fixed inset-0 pointer-events-none">
