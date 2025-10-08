@@ -21,9 +21,9 @@ export const Navigation = () => {
 
   return (
     <motion.nav
-      className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-card/40 backdrop-blur-xl border border-primary/20 rounded-full px-8 py-4"
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      className="fixed top-8 left-8 z-50 bg-card/40 backdrop-blur-xl border border-primary/20 rounded-full px-8 py-4"
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       <ul className="flex gap-8 items-center">
